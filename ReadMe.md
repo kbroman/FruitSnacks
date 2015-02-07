@@ -28,7 +28,7 @@ To address these questions, we gathered some data: we counted the
 number of snacks of each flavor in each package in one box. (It turned
 out that there were _81_ packages rather than 80 in our box.) We took
 a [photo of each](Photos/) (though we seemed to have missed one
-photo); browse the [photo gallyery](PhotoGallery.Rmd). And, of course, I wrote down our counts on paper, which
+photo); browse the [photo gallery](PhotoGallery.md). And, of course, I wrote down our counts on paper, which
 [I scanned](Data/fruit_snacks_scanned.pdf). And I entered the data
 into a [CSV file](Data/fruit_snacks.csv).
 
