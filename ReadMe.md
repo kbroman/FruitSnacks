@@ -5,7 +5,7 @@ My kids and I like
 from CostCo, in big boxes with 80 packages.
 
 There are five flavors/colors. We're not entirely sure what the
-corresponding fruits were supposed to be. The kids proposed:
+corresponding fruits are supposed to be. The kids proposed:
 
 - blueberry (or grape?) - _purple_
 - peach - _yellow_
