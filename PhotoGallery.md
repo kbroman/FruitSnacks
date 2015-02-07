@@ -302,6 +302,10 @@ Photos/fruitsnacks76.png
 ![`Photos/fruitsnacks76.png`](Photos/fruitsnacks76.png)
 
 
+Photos/fruitsnacks77.png
+![`Photos/fruitsnacks77.png`](Photos/fruitsnacks77.png)
+
+
 Photos/fruitsnacks78.png
 ![`Photos/fruitsnacks78.png`](Photos/fruitsnacks78.png)
 

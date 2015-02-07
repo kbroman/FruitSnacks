@@ -302,6 +302,10 @@ fruitsnacks76.png
 ![`fruitsnacks76.png`](fruitsnacks76.png)
 
 
+fruitsnacks77.png
+![`fruitsnacks77.png`](fruitsnacks77.png)
+
+
 fruitsnacks78.png
 ![`fruitsnacks78.png`](fruitsnacks78.png)
 
