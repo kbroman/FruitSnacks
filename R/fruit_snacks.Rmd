@@ -38,7 +38,8 @@ of the average number of snacks of each color in a package.
 par(mar=c(4.1, 4.1, 1.1, 0.6))
 ave_per_type <- colMeans(fs)
 barplot(ave_per_type, las=1, col=barcolor,
-        ylim=c(0, max(ave_per_type)*1.1))
+        ylim=c(0, max(ave_per_type)*1.1),
+        ylab="Ave. pieces per package")
 u <- par("usr")
 rect(u[1], u[3], u[2], u[4], border="black") # put a box around it
 ```
