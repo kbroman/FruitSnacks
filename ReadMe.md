@@ -7,7 +7,7 @@ from CostCo, in big boxes with 80 packages.
 There are five flavors/colors. We're not entirely sure what the
 corresponding fruits were supposed to be. The kids proposed:
 
-- blueberry (or grapes?) - _purple_
+- blueberry (or grape?) - _purple_
 - peach - _yellow_
 - raspberry - _pink_
 - strawberry - _red_
