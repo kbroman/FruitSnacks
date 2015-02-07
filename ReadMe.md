@@ -32,6 +32,9 @@ photo), I wrote down our counts on paper, which
 [I scanned](Data/fruit_snacks_scanned.pdf). And I entered the data
 into a [CSV file](Data/fruit_snacks.csv).
 
+A rough analysis of the data is in
+[`R/fruit_snacks.Rmd`](R/fruit_snacks.Rmd).
+
 ---
 
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
