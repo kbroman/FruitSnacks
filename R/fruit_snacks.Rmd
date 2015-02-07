@@ -8,7 +8,7 @@ output: html_document
 ```{r options, include=FALSE}
 knitr::opts_chunk$set(fig.width=12, fig.height=5,
                       echo=FALSE, results="hide")
-barcolor <- "#E6E6FA"
+barcolor <- "#E6E6FA" # Lavender
 ```
 
 ```{r load_data}
