@@ -19,8 +19,8 @@ n_per_package <- rowSums(fs)
 
 There were `r nrow(fs)` packages containing a total of `r sum(fs)`
 fruit snacks in `r ncol(fs)` colors. (I'd call them "flavors" but we
-can't much distinguish among them.) So there was an average of `r
-round(sum(fs)/nrow(fs), 1)` fruit snacks per package, with a range of
+can't much distinguish among them.) So there was an average of 
+`r round(sum(fs)/nrow(fs), 1)` fruit snacks per package, with a range of
 `r min(n_per_package)` &ndash; `r max(n_per_package)`.  Here's the
 distribution:
 
@@ -53,9 +53,9 @@ for(i in 1:ncol(fs))
        las=1, col=barcolor)
 ```
 
-We can see immediately that the different colors clearly differ in
-frequency.  But the distributions look plausibly random. If colors
-were randomly assigned to packages (but at color-specific
+We can see immediately that there is variation in the frequency of the
+different colors.  But the distributions look plausibly random. If
+colors were randomly assigned to packages (but at color-specific
 frequencies), these would be mixtures of binomial
 distributions. (_Mixtures_, because the number of snacks in a package
 varies.)
