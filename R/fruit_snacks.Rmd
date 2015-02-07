@@ -1,0 +1,65 @@
+---
+title: "Fruit snack analysis"
+author: "Karl Broman"
+date: 2015-02-05
+output: html_document
+---
+
+```{r options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=5,
+                      echo=FALSE, results="hide")
+barcolor <- "#E6E6FA"
+```
+
+```{r load_data}
+fs <- read.csv("../Data/fruit_snacks.csv")
+fs <- fs[,-1] # drop the column with IDs
+n_per_package <- rowSums(fs)
+```
+
+There were `r nrow(fs)` packages containing a total of `r sum(fs)`
+fruit snacks in `r ncol(fs)` colors. (I'd call them "flavors" but we
+can't much distinguish among them.) So there was an average of `r
+round(sum(fs)/nrow(fs), 1)` fruit snacks per package, with a range of
+`r min(n_per_package)` &ndash; `r max(n_per_package)`.  Here's the
+distribution:
+
+```{r num_snacks_per_package}
+par(mar=c(4.1, 4.1, 1.1, 0.6))
+hist(n_per_package, main="", xlab="Number of fruit snacks per package", las=1,
+     breaks=seq(min(n_per_package)-0.25, max(n_per_package)+0.25, 0.5),
+     col=barcolor)
+```
+
+The different colors have quite different frequencies. Here's a plot
+of the average number of snacks of each color in a package.
+
+```{r ave_of_each_color}
+par(mar=c(4.1, 4.1, 1.1, 0.6))
+ave_per_type <- colMeans(fs)
+barplot(ave_per_type, las=1, col=barcolor,
+        ylim=c(0, max(ave_per_type)*1.1))
+u <- par("usr")
+rect(u[1], u[3], u[2], u[4], border="black") # put a box around it
+```
+
+Here are histograms of the number of snacks per package for each color.
+
+```{r hist_of_each_color, fig.height=12}
+par(mfrow=c(5,1), mar=c(4.1, 4.1, 2.1, 0.6))
+br <- seq(-0.25, max(fs)+0.25, by=0.5)
+for(i in 1:ncol(fs))
+  hist(fs[,i], breaks=br, main=colnames(fs)[i], xlab="Number per package",
+       las=1, col=barcolor)
+```
+
+We can see immediately that the different colors clearly differ in
+frequency.  But the distributions look plausibly random. If colors
+were randomly assigned to packages (but at color-specific
+frequencies), these would be mixtures of binomial
+distributions. (_Mixtures_, because the number of snacks in a package
+varies.)
+
+I'll first focus on the purple ones.
+
+[**More to come.**]
