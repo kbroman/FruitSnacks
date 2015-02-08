@@ -26,14 +26,12 @@ We wondered:
 
 To address these questions, we gathered some data: we counted the
 number of snacks of each flavor in each package in one box. (It turned
-out that there were _81_ packages rather than 80 in our box.) We took
-a [photo of each](Photos/):
-browse the [photo gallery](PhotoGallery.md). And, of course, I wrote down our counts on paper, which
-[I scanned](Data/fruit_snacks_scanned.pdf). And I entered the data
-into a [CSV file](Data/fruit_snacks.csv).
+out that there were _81_ packages rather than 80 in our box.)
 
-A rough analysis of the data is in
-[`R/fruit_snacks.Rmd`](R/fruit_snacks.Rmd).
+- [CSV file of the data](Data/fruit_snacks.csv)
+- [Photo gallery](PhotoGallery.md)
+- [Scanned data](http://kbroman.org/FruitSnacks/assets/fruit_snacks_scanned.pdf)
+- [Rough analysis](http://kbroman.org/FruitSnacks/assets/fruit_snacks.html)
 
 ---
 
