@@ -51,11 +51,24 @@ of the average number of snacks of each color in a package.
 ```{r ave_of_each_color}
 par(mar=c(4.1, 4.1, 1.1, 0.6))
 ave_per_type <- colMeans(fs)
-barplot(ave_per_type, las=1, col=barcolor,
-        ylim=c(0, max(ave_per_type)*1.1),
-        ylab="Ave. pieces per package")
-u <- par("usr")
-rect(u[1], u[3], u[2], u[4], border="black") # put a box around it
+color <- brocolors("crayons")[c("Purple Heart", "Goldenrod", "Tickle Me Pink",
+                                "Scarlet", "Outrageous Orange")]
+ymx <- max(ave_per_type)*1.1
+yli <- c(0, ymx)
+x <- seq(along=ave_per_type)
+grayplot(x, ave_per_type, type="n",
+         xlab="Color", ylab="Ave. pieces per package",
+         ylim=yli, hlines=pretty(yli),
+         xlim=range(x)+c(-0.5, 0.5), xaxs="i", xat=NA,
+         vlines=x, vlines.lwd=3, vlines.col="gray70")
+axis(side=1, at=x, colnames(fs), tick=FALSE, mgp=c(0, 0.2, 0))
+xwidth <- 0.2
+segments(x-xwidth, ave_per_type, x+xwidth, ave_per_type,
+         col=color, lwd=2)
+ci <- apply(fs, 2, function(a) t.test(a)$conf.int)
+segments(x, ci[1,], x, ci[2,], lwd=2, col=color)
+for(i in 1:nrow(ci))
+    segments(x-xwidth/2, ci[i,], x+xwidth/2, ci[i,], lwd=2, col=color)
 ```
 
 Here are histograms of the number of snacks per package for each color.
