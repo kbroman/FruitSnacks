@@ -46,7 +46,8 @@ hist(n_per_package, main="", xlab="Number of fruit snacks per package", las=1,
 ```
 
 The different colors have quite different frequencies. Here's a plot
-of the average number of snacks of each color in a package.
+of the average number of snacks of each color in a package, with 95%
+confidence intervals.
 
 ```{r ave_of_each_color, fig.width=6}
 par(mar=c(4.1, 4.1, 1.1, 0.6))
