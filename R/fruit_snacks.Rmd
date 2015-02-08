@@ -19,7 +19,7 @@ n_per_package <- rowSums(fs)
 
 There were `r nrow(fs)` packages containing a total of `r sum(fs)`
 fruit snacks in `r ncol(fs)` colors. (I'd call them "flavors" but we
-can't much distinguish among them.) So there was an average of 
+can't much distinguish among them.) So there was an average of
 `r round(sum(fs)/nrow(fs), 1)` fruit snacks per package, with a range of
 `r min(n_per_package)` &ndash; `r max(n_per_package)`.  Here's the
 distribution:
