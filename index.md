@@ -32,6 +32,7 @@ To address these questions, we gathered some data: we counted the
 number of snacks of each flavor in each package in one box. (It turned
 out that there were _81_ packages rather than 80 in our box.)
 
+- [GitHub repository](https://github.com/kbroman/FruitSnacks)
 - [CSV file of the data](https://github.com/kbroman/FruitSnacks/blob/master/Data/fruit_snacks.csv)
 - [Photo gallery](https://github.com/kbroman/FruitSnacks/blob/master/PhotoGallery.md)
 - [Scanned data](assets/fruit_snacks_scanned.pdf)
