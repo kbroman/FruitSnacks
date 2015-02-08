@@ -30,18 +30,9 @@ We wondered:
 
 To address these questions, we gathered some data: we counted the
 number of snacks of each flavor in each package in one box. (It turned
-out that there were _81_ packages rather than 80 in our box.) We took
-a
-[photo of each](https://github.com/kbroman/FruitSnacks/tree/master/Photos);
-browse the
-[photo gallery](https://github.com/kbroman/FruitSnacks/blob/master/PhotoGallery.md). And,
-of course, I wrote down our counts on paper, which
-[I scanned](Data/fruit_snacks_scanned.pdf). And I entered the data
-into a [CSV file](Data/fruit_snacks.csv).
+out that there were _81_ packages rather than 80 in our box.)
 
-A rough analysis of the data is in
-[`R/fruit_snacks.Rmd`](R/fruit_snacks.Rmd).
-
----
-
-[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+- [Photo gallery](https://github.com/kbroman/FruitSnacks/blob/master/PhotoGallery.md)
+- [Scanned data](https://github.com/kbroman/FruitSnacks/blob/master/Data/fruit_snacks_scanned.pdf)
+- [Data as CSV](https://github.com/kbroman/FruitSnacks/blob/master/Data/fruit_snacks.csv)
+- [Rough analysis](assets/fruit_snacks.html)
