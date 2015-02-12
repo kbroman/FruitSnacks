@@ -117,9 +117,12 @@ Here are histograms of the number of snacks per package for each color.
 ```{r hist_of_each_color, fig.height=12}
 par(mfrow=c(5,1), mar=c(4.1, 4.1, 2.1, 0.6))
 br <- seq(-0.25, max(fs)+0.25, by=0.5)
-for(i in 1:ncol(fs))
-  hist(fs[,i], breaks=br, main=colnames(fs)[i], xlab="Number per package",
-       las=1, col=barcolor)
+for(i in 1:ncol(fs)) {
+  hist(fs[,i], breaks=br, xlab="Number per package",
+       las=1, col=barcolor, main="")
+  u <- par("usr")
+  text(7, sum(u[3:4]*c(0.4,0.6)), colnames(fs)[i], cex=2, adj=0.5)
+}
 ```
 
 We can see immediately that there is variation in the frequency of the
