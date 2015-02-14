@@ -10,6 +10,7 @@ knitr::opts_chunk$set(fig.width=12, fig.height=5,
                       echo=FALSE, results="hide",
                       message=FALSE, warning=FALSE)
 barcolor <- "#E6E6FA" # Lavender
+set.seed(33377561)
 ```
 
 ```{r load_package, include=FALSE}
@@ -125,8 +126,44 @@ for(i in 1:ncol(fs)) {
 }
 ```
 
-We can see immediately that there is variation in the frequency of the
-different colors.
+### Tests for differences
+
+It seems pretty clear from the histograms above that pink and red are
+the most common. In the observed data, orange is least common. Can we
+infer a general rule here? In Welch's big vat of fruit snacks, are
+pink and red most common, purple and yellow in the middle, and orange
+least common?
+
+We'll do some simple pairwise statistical tests, to check this. For
+example, if purple and pink are equally frequent in Welch's vat of
+fruit snacks, what would be the chance of seeing data as different as
+observed? I'll use pairwise, paired permutation tests.
+
+The following are the p-values obtained from 10,000 permutations for
+each pair of colors.
+
+```{r permtests, cache=TRUE, results="markup"}
+pval <- rep(1, choose(ncol(fs), 2))
+k <- 1
+for(i in 1:(ncol(fs)-1)) {
+    for(j in (i+1):ncol(fs)) {
+        pval[k] <- broman::paired.perm.test(fs[,i] - fs[,j], n.perm=10000)
+        names(pval)[k] <- paste(colnames(fs)[i], colnames(fs)[j], sep=":")
+        k <- k+1
+    }
+}
+pval <- as.matrix(pval)
+colnames(pval) <- "p-value"
+print(pval, digits=2)
+```
+
+As seen in this table of p-values, there's very strong evidence that orange,purple,yellow <
+pink,red, and reasonably strong evidence that orange < purple,yellow.
+The observed differences in the frequency of the purple and
+yellow snacks can reasonably be ascribed to chance variation, as are
+the differences between pink and red.
+
+
 
 ### Is there clustering of colors?
 
