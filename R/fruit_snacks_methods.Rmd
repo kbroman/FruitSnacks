@@ -179,7 +179,14 @@ calc_sdprop_binommixture <-
 }
 ```
 
+### Permuting the main data set
+
+
+### Permutation test with SD as statistic
+
 
 ---
+
+[Source on GitHub](https://github.com/kbroman/FruitSnacks/blob/master/R/fruit_snacks_methods.Rmd)
 
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
