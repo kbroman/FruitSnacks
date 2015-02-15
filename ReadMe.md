@@ -31,7 +31,8 @@ out that there were _81_ packages rather than 80 in our box.)
 - [CSV file of the data](Data/fruit_snacks.csv)
 - [Photo gallery](PhotoGallery.md)
 - [Scanned data](http://kbroman.org/FruitSnacks/assets/fruit_snacks_scanned.pdf)
-- [Rough analysis](http://kbroman.org/FruitSnacks/assets/fruit_snacks.html)
+- [Analysis](http://kbroman.org/FruitSnacks/assets/fruit_snacks.html)
+- [Analysis methods](http://kbroman.org/FruitSnacks/assets/fruit_snacks_methods.html)
 
 ---
 

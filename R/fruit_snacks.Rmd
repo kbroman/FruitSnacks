@@ -70,6 +70,9 @@ The data are available at GitHub. This document describes our results.
 - [Photo gallery](https://github.com/kbroman/FruitSnacks/PhotoGallery.md)
 - [Scanned data](http://kbroman.org/FruitSnacks/assets/fruit_snacks_scanned.pdf)
 
+I don't give many methods details here; they're described in
+[a separate document](http://kbroman.org/FruitSnacks/assets/fruit_snacks_methods.html).
+
 
 ### Summaries
 
