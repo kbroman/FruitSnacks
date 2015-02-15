@@ -32,3 +32,20 @@ calc_sd_binommixture <-
 
     sqrt(sum(probs * ((0:maxn) - xmean)^2))
 }
+
+calc_sdprop_binommixture <-
+    function(n=rowSums(fs), p=sum(fs[,1])/sum(fs))
+{
+    maxn <- max(n)
+    tabn <- table(n)
+    prop_n <- tabn/length(n)
+    n <- as.numeric(names(tabn))
+    probs <- t(vapply(n, function(number) dbinom(0:maxn, number, prob=p), rep(0, maxn+1)))
+
+    probs <- probs * rep(prop_n, ncol(probs))
+    vals <- t(vapply(n, function(number) (0:maxn)/number, rep(0, maxn+1)))
+
+    xmean <- sum(probs*vals)
+
+    sqrt(sum(probs * (vals - xmean)^2))
+}

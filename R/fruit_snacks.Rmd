@@ -235,7 +235,7 @@ Here are the results: observed and expected SDs, and a p-value for the
 test.
 
 ```{r show_results, results="markup"}
-results <- cbind(observed_SD=obs_sd, expected_sd=exp_sd, "p-value"=round(pval, 3))
+results <- cbind(observed_SD=obs_sd, expected_SD=exp_sd, "p-value"=round(pval, 3))
 print(results, digits=3)
 ```
 
@@ -245,6 +245,48 @@ SD (indicating anti-clustering: that the snacks are more evenly
 distributed than would be expected under randomness). But in both
 cases, the observed difference could reasonably be ascribed to chance
 variation.
+
+I was using counts there; it seems like maybe I should look at the
+_proportion_ instead: for each color, the SD across packages of the
+proportion of snacks that are that color.
+
+
+```{r calc_obs_and_expected_sd_prop}
+obs_sd_prop <- apply(fs/rowSums(fs), 2, sd)
+exp_sd_prop <- apply(fs, 2, function(a, b) calc_sdprop_binommixture(rowSums(b), sum(a)/sum(b)), fs)
+```
+
+```{r perm_test_sd_prop, cache=TRUE}
+n.perm <- 10000
+permsdprop <- matrix(ncol=ncol(fs), nrow=n.perm)
+for(i in 1:n.perm) {
+    permdat <- table(tidytab$package, sample(tidytab$color))
+    permsdprop[i,] <- apply(permdat/rowSums(permdat), 2, sd)
+}
+```
+
+```{r calc_pvals_clustering_prop}
+pval_prop <- rep(0, ncol(fs))
+names(pval_prop) <- colnames(fs)
+for(i in seq(along=pval_prop))
+    pval_prop[i] <- mean(abs(permsdprop[,i] - exp_sd_prop[i]) >= abs(obs_sd_prop[i] - exp_sd_prop[i]))
+```
+
+So I'll repeat the permutation tests, using the SD of the proportions
+as my test statistic, and again using 10,000 permutation replicates.
+
+Here are the results: observed and expected SDs of the proportions, and a p-value for the
+test.
+
+```{r show_results_prop, results="markup"}
+results <- cbind(observed_SD_prop=obs_sd_prop, expected_SD_prop=exp_sd_prop, "p-value"=pval_prop)
+print(round(results, 3), digits=3)
+```
+
+Using the SD of the proportions as the test statistic, the evidence
+for clustering in the purple snacks is a bit stronger, with
+P=`r round(pval_prop, 3)`. I'll tentatively conclude that there _is_
+clustering. But maybe we should gather some more data.
 
 
 ---
