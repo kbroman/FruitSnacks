@@ -177,6 +177,7 @@ calc_sdprop_binommixture <-
 
     sqrt(sum(probs * (vals - xmean)^2))
 }
+```
 
 
 ---
