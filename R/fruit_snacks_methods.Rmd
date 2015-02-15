@@ -129,7 +129,7 @@ across packages then follows a mixture of binomial distributions.
 I wrote a function to calculate the SD for such a binomial mixture.
 This is maybe a bit messy.
 
-```{r calc_sd_binommixture, eval=FALSE}
+```{r calc_sd_binommixture}
 calc_sd_binommixture <-
     function(n=rowSums(fs), p=sum(fs[,1])/sum(fs))
 {
@@ -154,13 +154,19 @@ probabilities. I then use `colSums()` to get the probabilities
 for the binomial mixture. Finally, I calculate the mean and then the
 SD of that mixture distribution.
 
+To actually calculate the set of expected SDs, I use `apply()`.
+
+```{r calc_exp_sd}
+exp_sd <- apply(fs, 2, function(a, b) calc_sd_binommixture(rowSums(b), sum(a)/sum(b)), fs)
+```
+
 There's a similar function for calculation the SD of the proportions,
 for this sort of binomial mixture. The only difference is that I need
 to use values that are proportions rather than numbers. I probably
 should have merged these two functions into one, to not have all of
 the repeated code.
 
-```{r calc_sdprop_binommixture, eval=FALSE}
+```{r calc_sdprop_binommixture}
 calc_sdprop_binommixture <-
     function(n=rowSums(fs), p=sum(fs[,1])/sum(fs))
 {
@@ -179,11 +185,96 @@ calc_sdprop_binommixture <-
 }
 ```
 
+
+
 ### Permuting the main data set
+
+To evaluate clustering, I could have compared the observed SD for a
+color to the distribution obtained by simulating data under the
+binomial mixture. I choose instead to do a permutation test: take the
+`r sum(fs)` snacks and randomly assign them to packages, keeping the
+number of snacks of each color constrained. I don't think it matters
+so much; I think the permutation test is a bit more cute.
+
+To perform the permutation test, I first create a
+"[tidy table](http://www.jstatsoft.org/v59/i10/paper)", with each row
+being a particular snack and with two columns: a numeric index
+(1&ndash;`r nrow(fs)`) for the package it was in, and a numeric index
+(1&ndash;`r ncol(fs)`) for its color.
+
+I create this table using a bit of `apply()`, `rep()`, and a `for` loop.
+
+```{r create_tidy_table}
+tidytab <- data.frame(package=rep(0, sum(fs)), color=rep(0, sum(fs)))
+tidytab$package <- unlist(apply(fs, 2, function(a) rep(1:nrow(fs), a)))
+cur <- 0
+for(i in 1:ncol(fs)) {
+    tidytab$color[cur + 1:sum(fs[,i])] <- rep(i, sum(fs[,i]))
+    cur <- cur + sum(fs[,i])
+}
+```
+
+The first part of the table looks like this:
+
+```{r head_tidy_table}
+head(tidytab)
+```
+
+To get this back to the table of packages &times; colors, use
+`table()`. It's good to check that you get the same result.
+
+```{r reconstruct_table}
+tab <- table(tidytab$package, tidytab$color)
+all(tab == fs)
+```
+
+In the permutation test, I just need to shuffle one column relative to
+the other (using `sample`) and then use `table()` to get the counts.
+
+```{r one_permutation}
+permtab <- table(tidytab$package, sample(tidytab$color))
+```
 
 
 ### Permutation test with SD as statistic
 
+With the code from the previous section, the permutation test is then
+pretty simple: I use a `for` loop to repeated permute the data, in
+each case using `apply` to calculate the column SDs.
+
+```{r do_permutations, cache=TRUE}
+n.perm <- 10000
+permsd <- matrix(ncol=ncol(fs), nrow=n.perm)
+for(i in 1:n.perm) {
+    permdat <- table(tidytab$package, sample(tidytab$color))
+    permsd[i,] <- apply(permdat, 2, sd)
+}
+```
+
+To calculate p-values, I look at the proportion of permutation
+replicates that gave an SD that was farther away from the expected SD,
+in absolute value, than what was actually observed.
+
+```{r calc_pvals}
+
+pval <- rep(0, ncol(fs))
+names(pval) <- colnames(fs)
+for(i in seq(along=pval))
+    pval[i] <- mean(abs(permsd[,i] - exp_sd[i]) >= abs(obs_sd[i] - exp_sd[i]))
+```
+
+The permutation test using the SD of the proportions rather than the
+SD of the counts is basically the same, I just need to convert to
+proportions before calculating the SDs.
+
+```{r perm_test_sd_prop, cache=TRUE}
+n.perm <- 10000
+permsdprop <- matrix(ncol=ncol(fs), nrow=n.perm)
+for(i in 1:n.perm) {
+    permdat <- table(tidytab$package, sample(tidytab$color))
+    permsdprop[i,] <- apply(permdat/rowSums(permdat), 2, sd)
+}
+```
 
 ---
 
