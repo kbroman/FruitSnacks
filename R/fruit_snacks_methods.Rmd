@@ -1,0 +1,86 @@
+---
+title: "Fruit snack analysis details"
+author: "Karl Broman"
+date: 2015-02-15
+output: html_document
+---
+
+```{r options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=5,
+                      echo=FALSE, results="hide",
+                      message=FALSE, warning=FALSE)
+barcolor <- "#E6E6FA" # Lavender
+set.seed(33377561)
+```
+
+```{r load_package, include=FALSE}
+# load R/broman package (at https://github.com/kbroman/broman)
+if(!require(broman)) {
+    required <- c("devtools", "RPushbullet", "jsonlite")
+    for(pkg in required) {
+        if(!require(pkg, character.only=TRUE))
+            install.packages(pkg)
+    }
+    library(devtools)
+    install_github("kbroman/broman")
+}
+if(!require(assertthat))
+    install.packages("assertthat")
+```
+
+```{r load_data}
+fs <- read.csv("../Data/fruit_snacks.csv")
+fs <- fs[,-1] # drop the column with IDs
+n_per_package <- rowSums(fs)
+```
+
+### Introduction
+
+In
+[the document](http://kbroman.org/FruitSnacks/assets/fruit_snacks.html)
+describing my analysis of the
+[fruit snacks data](https://github.com/kbroman/FruitSnacks), I focused
+on high-level results and suppressed discussion of the details of my
+analyses. In the present document, I'll describe some of the tricks I used.
+
+### Paired permutation tests
+
+To evaluate differences in the frequencies of different colors of
+snacks, I consider a pair of colors and then used a paired permutation
+test (with the t-statistic). This was accomplished with the
+`paired.perm.test()` function in the
+[R/broman](https://github.com/kbroman/broman) package. That function
+can do an _exhaustive_ permutation test (for small samples), or a
+simulation-based permutation test, as used here.
+
+Here's a simplified version of the function, just for the
+simulation-based permutation test:
+
+```{r paired_perm_test, eval=FALSE, echo=TRUE}
+paired.perm.test <-
+function(d, n.perm=10000)
+{
+    n <- length(d)
+    tobs <- t.test(d)$statistic
+
+    allt <- 1:n.perm
+    for(i in 1:n.perm) {
+        permd <- d*sample(c(-1,1), n, replace=TRUE)
+        allt[i] <- t.test(permd)$statistic
+    }
+
+    mean(abs(allt) >= abs(tobs))
+}
+```
+
+The input is a set of differences, `d`. I calculate the t-statistic
+with the R function `t.test()`, and the central permutation test part
+involves a `for` loop. I use `sample()` to apply a random sign
+(positive or negative) to each difference, and then `t.test()` again
+to calculate the t-statistic. The returned p-value is the proportion
+of t-statistics from the permutations that are &ge; the observed one,
+in absolute value.
+
+---
+
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)

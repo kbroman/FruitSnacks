@@ -1,6 +1,6 @@
-all: R/fruit_snacks.html Photos/ReadMe.md
+all: R/fruit_snacks.html Photos/ReadMe.md R/fruit_snacks_methods.html
 
-R/fruit_snacks.html: R/fruit_snacks.Rmd
+R/%.html: R/%.Rmd
 	cd R;R -e "rmarkdown::render('$(<F)')"
 
 Photos/ReadMe.md: R/generate_photo_gallery.R Photos/thumbs/thumb01.png
