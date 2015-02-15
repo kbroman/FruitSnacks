@@ -7,7 +7,7 @@ output: html_document
 
 ```{r options, include=FALSE}
 knitr::opts_chunk$set(fig.width=12, fig.height=5,
-                      echo=FALSE, results="hide",
+                      results="hide",
                       message=FALSE, warning=FALSE)
 barcolor <- "#E6E6FA" # Lavender
 set.seed(33377561)
@@ -28,11 +28,6 @@ if(!require(assertthat))
     install.packages("assertthat")
 ```
 
-```{r load_data}
-fs <- read.csv("../Data/fruit_snacks.csv")
-fs <- fs[,-1] # drop the column with IDs
-n_per_package <- rowSums(fs)
-```
 
 ### Introduction
 
@@ -42,6 +37,23 @@ describing my analysis of the
 [fruit snacks data](https://github.com/kbroman/FruitSnacks), I focused
 on high-level results and suppressed discussion of the details of my
 analyses. In the present document, I'll describe some of the tricks I used.
+
+With the [RCurl](http://cran.r-project.org/web/packages/RCurl/)
+package, we can load the data directly from the web. (We need RCurl,
+because [GitHub](https://github.com) uses https rather than just http.)
+
+```{r load_data}
+library(RCurl)
+fsdat <- getURL("https://raw.githubusercontent.com/kbroman/FruitSnacks/master/Data/fruit_snacks.csv")
+fs <- read.csv(text=fsdat)
+```
+
+I'll drop the first column, which just contains identifiers
+(1&ndash;`r nrow(fs)`) for the fruit snack packages.
+
+```{r drop_first_column}
+fs <- fs[,-1]
+```
 
 ### Paired permutation tests
 
@@ -56,7 +68,7 @@ simulation-based permutation test, as used here.
 Here's a simplified version of the function, just for the
 simulation-based permutation test:
 
-```{r paired_perm_test, eval=FALSE, echo=TRUE}
+```{r paired_perm_test, eval=FALSE}
 paired.perm.test <-
 function(d, n.perm=10000)
 {
@@ -80,6 +92,92 @@ involves a `for` loop. I use `sample()` to apply a random sign
 to calculate the t-statistic. The returned p-value is the proportion
 of t-statistics from the permutations that are &ge; the observed one,
 in absolute value.
+
+### Calculation of SDs for each color
+
+The data are contained in a matrix `fs`, with `r nrow(fs)` rows (the
+observed packages) and `r ncol(fs)` columns (the different colors).
+To calculate the observed SD for the number of snacks of each color, I
+use `apply`, as follows:
+
+```{r calc_obs_sd}
+obs_sd <- apply(fs, 2, sd)
+```
+
+To calculate the SD of the _proportions_, I first calculate the number
+of snacks per package, using `rowSums`. I then convert the counts to
+proportions by dividing by those sums. (This makes use the fact that
+the data are stored by column, and the column of row sums will be
+repeated. I then use `apply` again.
+
+```{r calc_prop}
+n_per_package <- rowSums(fs)
+props <- fs / n_per_package
+obs_sd_prop <- apply(props, 2, sd)
+```
+
+
+### Expected SD under binomial mixture model
+
+In the analysis of clustering, the _null_ model is that the colors
+were randomly assigned to packages (but at color-specific
+frequencies). Thus the number of snacks of a particular color, given
+the total number of snacks in a package, follows a binomial
+distribution. The distribution of the counts of a particular color
+across packages then follows a mixture of binomial distributions.
+
+I wrote a function to calculate the SD for such a binomial mixture.
+This is maybe a bit messy.
+
+```{r calc_sd_binommixture, eval=FALSE}
+calc_sd_binommixture <-
+    function(n=rowSums(fs), p=sum(fs[,1])/sum(fs))
+{
+    maxn <- max(n)
+    tabn <- table(n)
+    prop_n <- tabn/length(n)
+    n <- as.numeric(names(tabn))
+    probs <- t(vapply(n, function(number) dbinom(0:maxn, number, prob=p), rep(0, maxn+1)))
+
+    probs <- colSums(probs * rep(prop_n, ncol(probs)))
+
+    xmean <- sum(probs*(0:maxn))
+
+    sqrt(sum(probs * ((0:maxn) - xmean)^2))
+}
+```
+
+The input is a vector of numbers of snacks per package (`n`) and the
+frequency of a particular color (`p`). I determine the unique values
+in `n`, and then use `dbinom()` and `vapply()` to get the binomial
+probabilities. I then use `colSums()` to get the probabilities
+for the binomial mixture. Finally, I calculate the mean and then the
+SD of that mixture distribution.
+
+There's a similar function for calculation the SD of the proportions,
+for this sort of binomial mixture. The only difference is that I need
+to use values that are proportions rather than numbers. I probably
+should have merged these two functions into one, to not have all of
+the repeated code.
+
+```{r calc_sdprop_binommixture, eval=FALSE}
+calc_sdprop_binommixture <-
+    function(n=rowSums(fs), p=sum(fs[,1])/sum(fs))
+{
+    maxn <- max(n)
+    tabn <- table(n)
+    prop_n <- tabn/length(n)
+    n <- as.numeric(names(tabn))
+    probs <- t(vapply(n, function(number) dbinom(0:maxn, number, prob=p), rep(0, maxn+1)))
+
+    probs <- probs * rep(prop_n, ncol(probs))
+    vals <- t(vapply(n, function(number) (0:maxn)/number, rep(0, maxn+1)))
+
+    xmean <- sum(probs*vals)
+
+    sqrt(sum(probs * (vals - xmean)^2))
+}
+
 
 ---
 
