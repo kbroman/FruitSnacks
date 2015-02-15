@@ -285,7 +285,7 @@ print(round(results, 3), digits=3)
 
 Using the SD of the proportions as the test statistic, the evidence
 for clustering in the purple snacks is a bit stronger, with
-P=`r round(pval_prop, 3)`. I'll tentatively conclude that there _is_
+P=`r round(pval_prop[1], 3)`. I'll tentatively conclude that there _is_
 clustering. But maybe we should gather some more data.
 
 
