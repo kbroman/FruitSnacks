@@ -66,8 +66,8 @@ out that there were _81_ packages rather than 80 in our box.)
 
 The data are available at GitHub. This document describes our results.
 
-- [CSV file of the data](https://github.com/kbroman/FruitSnacks/Data/fruit_snacks.csv)
-- [Photo gallery](https://github.com/kbroman/FruitSnacks/PhotoGallery.md)
+- [CSV file of the data](https://raw.githubusercontent.com/kbroman/FruitSnacks/master/Data/fruit_snacks.csv)
+- [Photo gallery](https://github.com/kbroman/FruitSnacks/blob/master/PhotoGallery.md)
 - [Scanned data](http://kbroman.org/FruitSnacks/assets/fruit_snacks_scanned.pdf)
 
 I don't give many methods details here; they're described in
