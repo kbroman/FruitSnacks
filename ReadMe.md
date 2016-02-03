@@ -35,7 +35,7 @@ out that there were _81_ packages rather than 80 in our box.)
 - [Analysis methods](http://kbroman.org/FruitSnacks/assets/fruit_snacks_methods.html)
 
 We presented the work at the
-[Glenn Stephens](https://stephens.madison.k12.wi.us/) science far on 2
+[Glenn Stephens](https://stephens.madison.k12.wi.us/) science fair on 2
 Feb 2016. At the science fair, kids gathered data on a second box,
 which contained _83_ packages rather than the expected 80.
 
