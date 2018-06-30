@@ -1,7 +1,7 @@
 ### Data on fruit snacks
 
 My kids and I like
-[Welch's fruit snacks](http://www.welchsfruitsnacks.com/). We buy them
+[Welch's fruit snacks](https://www.welchsfruitsnacks.com/). We buy them
 from CostCo, in big boxes with 80 packages.
 
 There are five flavors/colors. We're not entirely sure what the
@@ -30,9 +30,9 @@ out that there were _81_ packages rather than 80 in our box.)
 
 - [CSV file of the data](Data/fruit_snacks.csv)
 - [Photo gallery](PhotoGallery.md)
-- [Scanned data](http://kbroman.org/FruitSnacks/assets/fruit_snacks_scanned.pdf)
-- [Analysis](http://kbroman.org/FruitSnacks/assets/fruit_snacks.html)
-- [Analysis methods](http://kbroman.org/FruitSnacks/assets/fruit_snacks_methods.html)
+- [Scanned data](https://kbroman.org/FruitSnacks/assets/fruit_snacks_scanned.pdf)
+- [Analysis](https://kbroman.org/FruitSnacks/assets/fruit_snacks.html)
+- [Analysis methods](https://kbroman.org/FruitSnacks/assets/fruit_snacks_methods.html)
 
 We presented the work at the
 [Glenn Stephens](https://stephens.madison.k12.wi.us/) science fair on 2
@@ -44,4 +44,4 @@ which contained _83_ packages rather than the expected 80.
 
 ---
 
-[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+[![CC0](https://i.creativecommons.org/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
