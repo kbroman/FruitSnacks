@@ -5,7 +5,7 @@ description: Counts of fruit snacks
 ---
 
 My kids and I like
-[Welch's fruit snacks](http://www.welchsfruitsnacks.com/). We buy them
+[Welch's fruit snacks](https://www.welchsfruitsnacks.com/). We buy them
 from CostCo, in big boxes with 80 packages.
 
 There are five flavors/colors. We're not entirely sure what the
