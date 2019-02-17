@@ -41,6 +41,11 @@ which contained _83_ packages rather than the expected 80.
 
 - [CSV file of the 2nd data set](Data/fruit_snacks_box2.csv)
 
+We added data on a third box in May 2017. These data include two extra
+columns: `total` and `person`. The latter takes values `d`, `c`, `a`,
+or `m`.
+
+- [CSV file of the 3rd data set](Data/fruit_snacks_box3.csv)
 
 ---
 
