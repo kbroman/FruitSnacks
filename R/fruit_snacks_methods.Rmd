@@ -16,16 +16,11 @@ set.seed(33377561)
 ```{r load_package, include=FALSE}
 # load R/broman package (at https://github.com/kbroman/broman)
 if(!require(broman)) {
-    required <- c("devtools", "RPushbullet", "jsonlite")
-    for(pkg in required) {
-        if(!require(pkg, character.only=TRUE))
-            install.packages(pkg)
-    }
-    library(devtools)
-    install_github("kbroman/broman")
+    install.packages("broman", repos="https://cran.rstudio.com")
 }
-if(!require(assertthat))
-    install.packages("assertthat")
+if(!require(assertthat)) {
+    install.packages("assertthat", repos="https://cran.rstudio.com")
+}
 ```
 
 
