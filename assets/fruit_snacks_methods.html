@@ -195,8 +195,8 @@ $(document).ready(function () {
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
 <p>In <a href="http://kbroman.org/FruitSnacks/assets/fruit_snacks.html">the document</a> describing my analysis of the <a href="https://github.com/kbroman/FruitSnacks">fruit snacks data</a>, I focused on high-level results and suppressed discussion of the details of my analyses. In the present document, I’ll describe some of the tricks I used.</p>
-<p>We can load the data directly from the web with <code>read.csv()</code>.</p>
-<pre class="r"><code>fs &lt;- read.csv(&quot;https://raw.githubusercontent.com/kbroman/FruitSnacks/master/Data/fruit_snacks.csv&quot;)</code></pre>
+<p>We can load the data with <code>read.csv()</code>.</p>
+<pre class="r"><code>fs &lt;- read.csv(&quot;../Data/fruit_snacks.csv&quot;)</code></pre>
 <p>I’ll drop the first column, which just contains identifiers (1–81) for the fruit snack packages.</p>
 <pre class="r"><code>fs &lt;- fs[,-1]</code></pre>
 </div>
