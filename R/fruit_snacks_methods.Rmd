@@ -38,14 +38,10 @@ describing my analysis of the
 on high-level results and suppressed discussion of the details of my
 analyses. In the present document, I'll describe some of the tricks I used.
 
-With the [RCurl](http://cran.r-project.org/web/packages/RCurl/)
-package, we can load the data directly from the web. (We need RCurl,
-because [GitHub](https://github.com) uses https rather than just http.)
+We can load the data directly from the web with `read.csv()`.
 
 ```{r load_data}
-library(RCurl)
-fsdat <- getURL("https://raw.githubusercontent.com/kbroman/FruitSnacks/master/Data/fruit_snacks.csv")
-fs <- read.csv(text=fsdat)
+fs <- read.csv("https://raw.githubusercontent.com/kbroman/FruitSnacks/master/Data/fruit_snacks.csv")
 ```
 
 I'll drop the first column, which just contains identifiers
