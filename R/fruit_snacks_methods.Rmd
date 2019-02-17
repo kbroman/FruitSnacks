@@ -18,9 +18,6 @@ set.seed(33377561)
 if(!require(broman)) {
     install.packages("broman", repos="https://cran.rstudio.com")
 }
-if(!require(assertthat)) {
-    install.packages("assertthat", repos="https://cran.rstudio.com")
-}
 ```
 
 
