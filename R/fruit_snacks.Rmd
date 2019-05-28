@@ -178,7 +178,7 @@ varies.)
 
 It might be best to stratify based on the number of snacks in a
 package, but I'm going to just look overall. The simplest thing to do
-is to look at the varibility (as measured by the standard deviation
+is to look at the variability (as measured by the standard deviation
 SD) in the number of snacks of a particular color. If purple snacks
 are clustered, the SD should be higher than that expected under the
 binomial mixture model.
