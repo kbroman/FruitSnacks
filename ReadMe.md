@@ -1,5 +1,7 @@
 ### Data on fruit snacks
 
+[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20070576.svg)](https://doi.org/10.5281/zenodo.20070576)
+
 My kids and I like
 [Welch's fruit snacks](https://www.welchsfruitsnacks.com/). We buy them
 from CostCo, in big boxes with 80 packages.
