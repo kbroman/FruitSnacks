@@ -38,3 +38,7 @@ out that there were _81_ packages rather than 80 in our box.)
 - [Scanned data](assets/fruit_snacks_scanned.pdf)
 - [Analysis](assets/fruit_snacks.html)
 - [Analysis methods](assets/fruit_snacks_methods.html)
+
+---
+
+[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20070576.svg)](https://doi.org/10.5281/zenodo.20070576)

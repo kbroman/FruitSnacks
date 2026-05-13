@@ -1,5 +1,7 @@
 ### Data on fruit snacks
 
+[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20070576.svg)](https://doi.org/10.5281/zenodo.20070576)
+
 This is the website that corresponds to the
 [Fruit snacks data](https://github.com/kbroman/FruitSnacks).
 
